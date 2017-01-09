@@ -1,0 +1,22 @@
+<aura:component controller="LeadStagecontroller" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="leadstage" type="LeadStagecontroller.stageWrap[]"/>
+    <aura:attribute name="selectedStage" type="String"/>
+    <aura:handler name="changeStg" event="c:LeadStageChangeEvt" action="{!c.updateStage}"/>
+    
+    <!--<aura:handler event="aura:waiting" action="{!c.toggleSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.toggleSpinner}"/>-->
+    
+    <lightning:spinner variant="brand" size="medium" aura:id="mySpinner" class="slds-hide"/>
+    <div class="slds-grid">
+        <div class="slds-tabs--path" role="application">
+            <ul class="slds-tabs--path__nav" role="tablist">
+                <aura:iteration items="{!v.leadstage}" var="s" indexVar="ind">
+                    <c:LeadStage selectstage="{!s.stage}" recId="{!v.recordId}" index="{!ind}" class="{!s.selection}"/>
+                    
+                </aura:iteration>
+            </ul>
+        </div>
+    </div>
+    
+</aura:component>
